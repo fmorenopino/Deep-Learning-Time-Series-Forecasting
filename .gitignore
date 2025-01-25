@@ -11,6 +11,7 @@ DeepAR/experiments/base_model/figures_*/
 ConvTrans/runs/
 best.pth.tar
 *.pth.tar
+DeepAR_intro_tmp*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -28,21 +28,20 @@ conda create --name name-of-env python=3.10
 
 ### Instructions to run DeepAR
 
+
 1. Download the electricity dataset: https://archive.ics.uci.edu/ml/datasets/ElectricityLoadDiagrams20112014.
 2. Move it into the DeepAR folder and run:
 ```
 python preprocess_elect.py
 ```
+3. Run main.py: `python main.py` (if you run from terminal instead of VS Code you may have to change the directories used in the code). **Note that once you have downloaded the data, instead of directly running the source code `main.py` you can take a look to the notebook `DeepAR_intro.ipynb` that introduces some of the most important functions of DeepAR**.
+4. Results will be saved in `DeepAR/experiments/base_model/`.
 
 If training is taking too much time, you can use the option `max_samples` when setting up the `WeightedSampler` for training on a subset of time series (but take into account that you probably won't converge to a proper solution and performance on test will drop):
 
 ```
 sampler = WeightedSampler(data_dir, args.dataset, replacement=True, max_samples=5000)
 ```
-3. Run main.py: `python main.py` (if you run from terminal instead of VS Code you may have to change the directories used in the code).
-4. Results will be saved in `DeepAR/experiments/base_model/`.
-
-
 
 ## Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting
 
