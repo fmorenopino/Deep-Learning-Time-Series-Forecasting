@@ -1,4 +1,4 @@
-# IE CDT Time Series Analysis and Signal Processing Lab, University of Oxford
+# Intelligent Earth CDT Time Series Analysis and Signal Processing Lab, University of Oxford
 
 ## Deep Learning for Time Series Forecasting
 
