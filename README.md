@@ -34,7 +34,10 @@ conda create --name name-of-env python=3.10
 ```
 python preprocess_elect.py
 ```
-3. Run main.py: `python main.py` (if you run from terminal instead of VS Code you may have to change the directories used in the code). **Note that once you have downloaded the data, instead of directly running the source code `main.py` you can take a look to the notebook `DeepAR_intro.ipynb` that introduces some of the most important functions of DeepAR**.
+3. Run main.py: `python main.py` (If you run it from a terminal instead of VS Code, you may need to adjust the directory paths in the code).
+
+**Note: Once you have downloaded the data, instead of directly running the `main.py` source code, you can explore the notebook `DeepAR_intro.ipynb`, which introduces some of the most important functions of DeepAR.**.
+
 4. Results will be saved in `DeepAR/experiments/base_model/`.
 
 If training is taking too much time, you can use the option `max_samples` when setting up the `WeightedSampler` for training on a subset of time series (but take into account that you probably won't converge to a proper solution and performance on test will drop):
