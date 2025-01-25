@@ -23,7 +23,7 @@ where $` \theta `$ represents the learnable parameters of the model and $` \{\ma
 
 ### Base Architecture
 
-Several state-of-the-art deep-autoregressive models, including DeepAR, ConvTrans, and SAAM, share a high-level architecture, see Figure 1, characterised by the following components:
+Several state-of-the-art deep-autoregressive models, including DeepAR and ConvTrans, share a high-level architecture, see Figure 1, characterised by the following components:
 
 1. **Embedding Function** $`\mathbf{e}_{t}^{i} = f_{\phi}\left(\mathbf{e}_{t-1}^{i}, z^{i}_{t-1}, \mathbf{x}_{t}^{i} \right) \in \mathbb{R}^{D}`$, where $` f_{\phi}(\cdot) `$ is the transit function with parameters $` \phi `$. At each time step $` t `$, the embedding function takes as input the previous time step's embedding $` \mathbf{e}_{t-1}^{i} `$, the previous value of the time series $` z_{t-1}^{i} `$, and the current covariates $` \mathbf{x}_{t}^{i} `$. This function can be implemented using various architectures such as a RNN, a LSTM, a Temporal Convolutional Network (TCN), or a Transformer model.
 
