@@ -29,11 +29,11 @@ Several state-of-the-art deep-autoregressive models, including DeepAR and ConvTr
 
 2. **Probabilistic Model** $`p\left(z_{t}^{i} \mid \mathbf{e}_{t}^{i} \right)`$, with parameters $` \psi `$, which utilises the embedding $` \mathbf{e}_{t}^{i} `$ to estimate the next value of the time series $` \hat{z}_{t}^{i} `$. Typically, this probabilistic model is implemented as a neural network function that parameterises the required probability distribution. For instance, a Gaussian distribution can be represented through its mean $` \mu = g_{\mu}(\mathbf{w}_{\mu}^{T} \mathbf{e}_{t}^{i} + b_{\mu}) `$ and standard deviation $` \sigma = \log \left(1 + \exp \left(g_{\sigma}(\mathbf{w}_{\sigma}^{T} \mathbf{e}_{t}^{i} + b_{\sigma})\right)\right) `$, where $` g_{\mu} `$ and $` g_{\sigma} `$ are neural networks.
 
-<div align="left">
+<p align="center">
   <img src="DeepAR/notebook_images/basic_architecture.png" width="250" alt="Basic Architecture"/>
-  <figcaption><strong>Figure 1:</strong> Base architecture of deep learning-based autoregressive
-models. Gray represents observed variables.</figcaption>
-</div>
+  <br/>
+  <strong>Figure 1:</strong> Base architecture of deep learning-based autoregressive models. Gray represents observed variables.
+</p>
 
 ### Training
 
@@ -59,10 +59,11 @@ where the model uses the previous time step's prediction $` \hat{z}_{t-1}^{i} `$
 
 Note that Transformers, unlike RNNs or LSTMs, do not compute the embedding in a sequential manner. Accordingly, when obtaining the embedding through a Transformer model and so to use the encoder-decoder architecture previously described, we use the Transformer decoder-only mode.
 
-<div align="left">
+<p style="text-align: center;">
   <img src="DeepAR/notebook_images/basic_architecture_unrolled.png" width="500" alt="Unrolled Basic Architecture"/>
-  <figcaption><strong>Figure 2:</strong> Unrolled base architecture. On the left of the forecast horizon, the conditioning range can be found. On its right, the forecasting range.</figcaption>
-</div>
+  <br/>
+  <strong>Figure 2:</strong> Unrolled base architecture. On the left of the forecast horizon, the conditioning range can be found. On its right, the forecasting range.
+</p>
 
 
 ### Metrics and Evaluation
