@@ -15,9 +15,9 @@ In this section, we formally state the problem of time series forecasting and in
 
 Given a set of $ N $ univariate time series $\{z^{i}_{1:t_0-1}\}_{i=1}^{N} $, where $ z_{1: t_0-1}^{i} = (z_{1}^{i}, z_{2}^{i}, \ldots, z_{t_{0}-1}^{i}) $, $ t_0 \in \mathbb{N} $ is the forecast horizon, $ \tau \in \mathbb{N} $ is the forecast length, and $ T = t_0 + \tau \in \mathbb{N} $ is the total length of the sequences, the objective is to model the conditional probability distribution of future trajectories for each time series given the past. Specifically, the goal is to predict the next $ \tau $ time steps after the forecast horizon:
 
-$$
+```math
 p\left(z_{t_{0}: t_0 + \tau}^{i} \mid z_{1: t_{0}-1}^{i}, \mathbf{x}_{1: t_0 + \tau}^{i}, \theta\right) = \prod_{t=t_{0}}^{t_0 + \tau} p\left(z_{t}^{i} \mid z_{1: t-1}^{i}, \mathbf{x}_{1: t}^{i}, \theta \right),
-$$
+```
 
 where $ \theta $ represents the learnable parameters of the model and $ \{\mathbf{x}^{i}_{1:t_0+\tau}\}_{i=1}^{N} \in \mathbb{R}^{C} $ are the associated covariates. These covariates, along with the past observations of the time series, serve as inputs to the predictive model.
 
@@ -29,16 +29,16 @@ Several state-of-the-art deep-autoregressive models, including DeepAR, ConvTrans
 
 2. **Probabilistic Model** $p\left(z_{t}^{i} \mid \mathbf{e}_{t}^{i} \right)$, with parameters $ \psi $, this model utilises the embedding $ \mathbf{e}_{t}^{i} $ to estimate the next value of the time series $ \hat{z}_{t}^{i} $. Typically, this probabilistic model is implemented as a neural network function that parameterises the required probability distribution. For instance, a Gaussian distribution can be represented through its mean and standard deviation:
 
-   $$
+   ```math
    \mu = g_{\mu}(\mathbf{w}_{\mu}^{T} \mathbf{e}_{t}^{i} + b_{\mu}),
-   $$
-   $$
+   ```
+   ```math
    \sigma = \log \left(1 + \exp \left(g_{\sigma}(\mathbf{w}_{\sigma}^{T} \mathbf{e}_{t}^{i} + b_{\sigma})\right)\right),
-   $$
+   ```
 
    where $ g_{\mu} $ and $ g_{\sigma} $ are neural networks.
 
-<div align="center">
+<div align="left">
   <img src="DeepAR/notebook_images/basic_architecture.png" width="250" alt="Basic Architecture"/>
   <figcaption><strong>Figure 1:</strong> Base architecture of deep learning-based autoregressive
 models. Gray represents observed variables.</figcaption>
@@ -48,9 +48,9 @@ models. Gray represents observed variables.</figcaption>
 
 The model's parameters $ \theta = \{\phi, \psi\} $ are optimised by maximising the log-likelihood function $ \mathcal{L}(\theta) $ over the observed data within the conditioning range (from $ t = 1 $ to $ t_0 - 1 $):
 
-$$
+```math
 \mathcal{L}(\theta) = \sum_{i=1}^{N} \log p\left(z_{1:t_0-1}^{i} \mid \mathbf{x}_{1:t_0-1}^{i}, \theta\right) = \sum_{i=1}^{N} \sum_{t=1}^{t_0-1} \log p\left(z_{t}^{i} \mid \mathbf{x}_{1:t-1}^{i}, \theta (\phi, \psi) \right).
-$$
+```
 
 All quantities required for computing the log-likelihood are deterministic, eliminating the need for inference.
 
@@ -60,15 +60,15 @@ During both training and testing, the conditioning range $ \{1 : t_0 - 1\} $ act
 
 For forecasting, predictions are made by sampling directly from the model:
 
-$$
+```math
 \hat{z}^{i}_{t_0:t_0+\tau} \sim p\left(z_{t_{0}: t_{0}+\tau}^{i} \mid z_{1: t_{0}-1}^{i}, \mathbf{x}^{i}_{1:t_0+\tau}, \theta\right),
-$$
+```
 
 where the model uses the previous time step's prediction $ \hat{z}_{t-1}^{i} $ as input, unlike the conditioning range where $ z_{t-1}^{i} $ is observed. This is shown in Figure 2.
 
 Note that Transformers, unlike RNNs or LSTMs, do not compute the embedding in a sequential manner. Accordingly, when obtaining the embedding through a Transformer model and so to use the encoder-decoder architecture previously described, we use the Transformer decoder-only mode.
 
-<div align="center">
+<div align="left">
   <img src="DeepAR/notebook_images/basic_architecture_unrolled.png" width="500" alt="Unrolled Basic Architecture"/>
   <figcaption><strong>Figure 2:</strong> Unrolled base architecture. On the left of the forecast horizon, the conditioning range can be found. On its right, the forecasting range.</figcaption>
 </div>
@@ -78,16 +78,16 @@ Note that Transformers, unlike RNNs or LSTMs, do not compute the embedding in a 
 
 Common metrics used for forecasting evaluation are the Normalized Deviation (ND) and Root Mean Square Error (RMSE):
 
-$$
+```math
 	\begin{split}
 	\mathrm{ND} &=\frac{\sum_{i, t}\left|z_{i, t}-\hat{z}_{i, t}\right|}{\sum_{i, t}\left|z_{i, t}\right|} \\[5pt]
 	\text { RMSE } &=\frac{\sqrt{\frac{1}{N\left(T-t_{0}\right)} \sum_{i, t}\left(z_{i, t}-\hat{z}_{i, t}\right)^{2}}}{\frac{1}{N\left(T-t_{0}\right)} \sum_{i, t}\left|z_{i, t}\right|}\\[5pt]
 	\end{split}
-$$
+```
 
 Also, the quantile loss, $QL_{\rho}$, with $\rho \in (0, 1)$ are commonly used:
 
-$$
+```math
 	\begin{split}
 	\mathrm{QL}_{\rho}(z, \hat{z})&=2 \frac{\sum_{i, t} P_{\rho}\left(z_{t}^{(i)}, \hat{z}_{t}^{(i)}\right)}{\sum_{i, t}\left|z_{t}^{(i)}\right|},\\
 	\quad P_{\rho}(z, \hat{z})&=\left\{\begin{array}{ll}
@@ -95,7 +95,7 @@ $$
 	(1-\rho)(\hat{z}-z) & \text { otherwise }.
 	\end{array}\right.
 	\end{split}
-$$
+```
 
 ### References
 
