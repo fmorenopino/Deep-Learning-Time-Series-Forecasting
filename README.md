@@ -112,7 +112,7 @@ conda create --name name-of-env python=3.10
 
 (Note: it is recommended to run the code in VS Code).
 
-## DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks
+## DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks [DeepAR]
 
 - Paper: https://arxiv.org/abs/1704.04110.
 
@@ -138,7 +138,7 @@ Note that, if training is taking too much time, you can use the option `max_samp
 sampler = WeightedSampler(data_dir, args.dataset, replacement=True, max_samples=5000)
 ```
 
-## Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting
+## Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting [ConvTrans]
 
 - Paper: https://arxiv.org/abs/1907.00235.
 
