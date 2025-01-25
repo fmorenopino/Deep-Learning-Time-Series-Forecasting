@@ -32,6 +32,7 @@ Several state-of-the-art deep-autoregressive models, including DeepAR and ConvTr
    ```math
    \mu = g_{\mu}(\mathbf{w}_{\mu}^{T} \mathbf{e}_{t}^{i} + b_{\mu}),
    ```
+   
    ```math
    \sigma = \log \left(1 + \exp \left(g_{\sigma}(\mathbf{w}_{\sigma}^{T} \mathbf{e}_{t}^{i} + b_{\sigma})\right)\right),
    ```
