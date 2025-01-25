@@ -1,4 +1,8 @@
-# Deep Learning for Time Series Forecasting
+# IE CDT Time Series Analysis and Signal Processing Lab, University of Oxford
+
+## Deep Learning for Time Series Forecasting
+
+### Fernando Moreno-Pino, University of Oxford (fernando.moreno-pino@eng.ox.ac.uk).
 
 This repository implements two deep learning models for time series forecasting: `DeepAR` ("DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks") and `ConvTrans` ("Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting"). See references below.
 
