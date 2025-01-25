@@ -46,7 +46,7 @@ models. Gray represents observed variables.</figcaption>
 
 ### Training
 
-The model's parameters $` \theta = \{\phi, \psi\} $ are optimised by maximising the log-likelihood function $` \mathcal{L}(\theta) $ over the observed data within the conditioning range (from $` t = 1 $ to $ t_0 - 1 $):
+The model's parameters $` \theta = \{\phi, \psi\} `$ are optimised by maximising the log-likelihood function $` \mathcal{L}(\theta) $ over the observed data within the conditioning range (from $` t = 1 $ to $ t_0 - 1 $):
 
 ```math
 \mathcal{L}(\theta) = \sum_{i=1}^{N} \log p\left(z_{1:t_0-1}^{i} \mid \mathbf{x}_{1:t_0-1}^{i}, \theta\right) = \sum_{i=1}^{N} \sum_{t=1}^{t_0-1} \log p\left(z_{t}^{i} \mid \mathbf{x}_{1:t-1}^{i}, \theta (\phi, \psi) \right).
