@@ -1,12 +1,12 @@
 # Deep Learning for Time Series Forecasting
 
-## Creating Conda Enviorment
+## Creating Conda Environment
 
 ```
 conda env create -f dlts.yml
 ```
 
-Alternatively, you can create a new conda environment with Python 3.10 and installing (conda install...) the rest of packagues (see requirements.txt).
+Alternatively, you can create a new conda environment with Python 3.10 and installing (conda install...) the rest of packages (see requirements.txt).
 
 ```
 conda create --name name-of-env python=3.10
@@ -28,13 +28,16 @@ Code from: https://github.com/husnejahan/DeepAR-pytorch.
 python preprocess_elect.py
 ```
 
-If training is taking to much, you can use just max_samples for training (but take into account that performance on test will drop):
+If training is taking too much, you can use the option `max_samples` when setting up the `WeightedSampler` for training on a subset of time series (but take into account that you probably won't converge to a proper solution and performance on test will drop):
 
 ```
-sampler = WeightedSampler(data_dir, args.dataset, replacement=True, max_samples=500)
+sampler = WeightedSampler(data_dir, args.dataset, replacement=True, max_samples=5000)
 ```
 3. Run main.py: `python main.py` (if you run from terminal instead of VS Code you may have to change the directories used in the code)
 4. Results will be saved in `DeepAR/experiments/base_model/`.
+5. 
+
+
 
 ## Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting
 
@@ -46,5 +49,7 @@ Paper: https://arxiv.org/abs/1907.00235.
 1. Run main.py: `python main.py` (if you run from terminal instead of VS Code you may have to change the directories used in the code)
 
 If training is taking to much, you can set the argument "train-ins-num" to a lower number, it will limit the number of time-series used for training (but take into account that performance on test will drop).
+
+
 
 
