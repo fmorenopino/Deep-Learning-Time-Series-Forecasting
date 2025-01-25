@@ -59,7 +59,7 @@ where the model uses the previous time step's prediction $` \hat{z}_{t-1}^{i} `$
 
 Note that Transformers, unlike RNNs or LSTMs, do not compute the embedding in a sequential manner. Accordingly, when obtaining the embedding through a Transformer model and so to use the encoder-decoder architecture previously described, we use the Transformer decoder-only mode.
 
-<p style="text-align: center;">
+<p align="center">
   <img src="DeepAR/notebook_images/basic_architecture_unrolled.png" width="500" alt="Unrolled Basic Architecture"/>
   <br/>
   <strong>Figure 2:</strong> Unrolled base architecture. On the left of the forecast horizon, the conditioning range can be found. On its right, the forecasting range.
