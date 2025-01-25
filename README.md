@@ -148,5 +148,5 @@ sampler = WeightedSampler(data_dir, args.dataset, replacement=True, max_samples=
 
 If training is taking too much time, you can set the argument `train-ins-num` to a lower number for training only on a subset of time series (but take into account that you probably won't converge to a proper solution and performance on test will drop)
 
-The model will show the results in the command line. 
+The model will report the results in the command line. 
 
