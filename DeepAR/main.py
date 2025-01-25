@@ -32,7 +32,6 @@ parser.add_argument('--restore-file', default=None,
                     help='Optional, name of the file in --model_dir containing weights to reload before \
                     training')  # 'best' or 'epoch_#'
 
-
 def train(model: nn.Module,
           optimizer: optim,
           loss_fn,
