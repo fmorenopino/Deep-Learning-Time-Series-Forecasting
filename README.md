@@ -28,7 +28,7 @@ conda create --name name-of-env python=3.10
 
 ### Instructions to run DeepAR
 
-1. Download the dataset: https://archive.ics.uci.edu/ml/datasets/ElectricityLoadDiagrams20112014.
+1. Download the electricity dataset: https://archive.ics.uci.edu/ml/datasets/ElectricityLoadDiagrams20112014.
 2. Move it into the DeepAR folder and run:
 ```
 python preprocess_elect.py
