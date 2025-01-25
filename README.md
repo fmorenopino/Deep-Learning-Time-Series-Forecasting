@@ -13,21 +13,21 @@ In this section, we formally state the problem of time series forecasting and in
 
 ### Problem Definition
 
-Given a set of $` N `$ univariate time series $`\{z^{i}_{1:t_0-1}\}_{i=1}^{N} `$, where $ z_{1: t_0-1}^{i} = (z_{1}^{i}, z_{2}^{i}, \ldots, z_{t_{0}-1}^{i}) $, $ t_0 \in \mathbb{N} $ is the forecast horizon, $ \tau \in \mathbb{N} $ is the forecast length, and $ T = t_0 + \tau \in \mathbb{N} $ is the total length of the sequences, the objective is to model the conditional probability distribution of future trajectories for each time series given the past. Specifically, the goal is to predict the next $ \tau $ time steps after the forecast horizon:
+Given a set of $` N `$ univariate time series $`\{z^{i}_{1:t_0-1}\}_{i=1}^{N} `$, where $` z_{1: t_0-1}^{i} = (z_{1}^{i}, z_{2}^{i}, \ldots, z_{t_{0}-1}^{i}) `$, $` t_0 \in \mathbb{N} `$ is the forecast horizon, $` \tau \in \mathbb{N} `$ is the forecast length, and $` T = t_0 + \tau \in \mathbb{N} `$ is the total length of the sequences, the objective is to model the conditional probability distribution of future trajectories for each time series given the past. Specifically, the goal is to predict the next $` \tau `$ time steps after the forecast horizon:
 
 ```math
 p\left(z_{t_{0}: t_0 + \tau}^{i} \mid z_{1: t_{0}-1}^{i}, \mathbf{x}_{1: t_0 + \tau}^{i}, \theta\right) = \prod_{t=t_{0}}^{t_0 + \tau} p\left(z_{t}^{i} \mid z_{1: t-1}^{i}, \mathbf{x}_{1: t}^{i}, \theta \right),
 ```
 
-where $ \theta $ represents the learnable parameters of the model and $ \{\mathbf{x}^{i}_{1:t_0+\tau}\}_{i=1}^{N} \in \mathbb{R}^{C} $ are the associated covariates. These covariates, along with the past observations of the time series, serve as inputs to the predictive model.
+where $` \theta `$ represents the learnable parameters of the model and $` \{\mathbf{x}^{i}_{1:t_0+\tau}\}_{i=1}^{N} \in \mathbb{R}^{C} `$ are the associated covariates. These covariates, along with the past observations of the time series, serve as inputs to the predictive model.
 
 ### Base Architecture
 
 Several state-of-the-art deep-autoregressive models, including DeepAR, ConvTrans, and SAAM, share a high-level architecture, see Figure 1, characterised by the following components:
 
-1. **Embedding Function** $\mathbf{e}_{t}^{i} = f_{\phi}\left(\mathbf{e}_{t-1}^{i}, z^{i}_{t-1}, \mathbf{x}_{t}^{i} \right) \in \mathbb{R}^{D}$, where $ f_{\phi}(\cdot) $ is the transit function with parameters $ \phi $. At each time step $ t $, the embedding function takes as input the previous time step's embedding $ \mathbf{e}_{t-1}^{i} $, the previous value of the time series $ z_{t-1}^{i} $, and the current covariates $ \mathbf{x}_{t}^{i} $. This function can be implemented using various architectures such as a RNN, a LSTM, a Temporal Convolutional Network (TCN), or a Transformer model.
+1. **Embedding Function** $`\mathbf{e}_{t}^{i} = f_{\phi}\left(\mathbf{e}_{t-1}^{i}, z^{i}_{t-1}, \mathbf{x}_{t}^{i} \right) \in \mathbb{R}^{D}`$, where $` f_{\phi}(\cdot) `$ is the transit function with parameters $` \phi `$. At each time step $` t `$, the embedding function takes as input the previous time step's embedding $` \mathbf{e}_{t-1}^{i} `$, the previous value of the time series $` z_{t-1}^{i} `$, and the current covariates $` \mathbf{x}_{t}^{i} `$. This function can be implemented using various architectures such as a RNN, a LSTM, a Temporal Convolutional Network (TCN), or a Transformer model.
 
-2. **Probabilistic Model** $p\left(z_{t}^{i} \mid \mathbf{e}_{t}^{i} \right)$, with parameters $ \psi $, this model utilises the embedding $ \mathbf{e}_{t}^{i} $ to estimate the next value of the time series $ \hat{z}_{t}^{i} $. Typically, this probabilistic model is implemented as a neural network function that parameterises the required probability distribution. For instance, a Gaussian distribution can be represented through its mean and standard deviation:
+2. **Probabilistic Model** $`p\left(z_{t}^{i} \mid \mathbf{e}_{t}^{i} \right)`$, with parameters $` \psi `$, this model utilises the embedding $` \mathbf{e}_{t}^{i} `$ to estimate the next value of the time series $` \hat{z}_{t}^{i} `$. Typically, this probabilistic model is implemented as a neural network function that parameterises the required probability distribution. For instance, a Gaussian distribution can be represented through its mean and standard deviation:
 
    ```math
    \mu = g_{\mu}(\mathbf{w}_{\mu}^{T} \mathbf{e}_{t}^{i} + b_{\mu}),
@@ -36,7 +36,7 @@ Several state-of-the-art deep-autoregressive models, including DeepAR, ConvTrans
    \sigma = \log \left(1 + \exp \left(g_{\sigma}(\mathbf{w}_{\sigma}^{T} \mathbf{e}_{t}^{i} + b_{\sigma})\right)\right),
    ```
 
-   where $ g_{\mu} $ and $ g_{\sigma} $ are neural networks.
+   where $` g_{\mu} `$ and $` g_{\sigma} `$ are neural networks.
 
 <div align="left">
   <img src="DeepAR/notebook_images/basic_architecture.png" width="250" alt="Basic Architecture"/>
@@ -46,7 +46,7 @@ models. Gray represents observed variables.</figcaption>
 
 ### Training
 
-The model's parameters $ \theta = \{\phi, \psi\} $ are optimised by maximising the log-likelihood function $ \mathcal{L}(\theta) $ over the observed data within the conditioning range (from $ t = 1 $ to $ t_0 - 1 $):
+The model's parameters $` \theta = \{\phi, \psi\} $ are optimised by maximising the log-likelihood function $` \mathcal{L}(\theta) $ over the observed data within the conditioning range (from $` t = 1 $ to $ t_0 - 1 $):
 
 ```math
 \mathcal{L}(\theta) = \sum_{i=1}^{N} \log p\left(z_{1:t_0-1}^{i} \mid \mathbf{x}_{1:t_0-1}^{i}, \theta\right) = \sum_{i=1}^{N} \sum_{t=1}^{t_0-1} \log p\left(z_{t}^{i} \mid \mathbf{x}_{1:t-1}^{i}, \theta (\phi, \psi) \right).
@@ -56,7 +56,7 @@ All quantities required for computing the log-likelihood are deterministic, elim
 
 ### Forecasting
 
-During both training and testing, the conditioning range $ \{1 : t_0 - 1\} $ acts similarly to the encoder in sequence-to-sequence models, transferring information to the forecasting range $ \{t_0 : t_0 + \tau\} $, analogous to the decoder. This base framework can thus be interpreted as an encoder-decoder architecture, where both encoder and decoder are the same network.
+During both training and testing, the conditioning range $` \{1 : t_0 - 1\} `$ acts similarly to the encoder in sequence-to-sequence models, transferring information to the forecasting range $` \{t_0 : t_0 + \tau\} `$, analogous to the decoder. This base framework can thus be interpreted as an encoder-decoder architecture, where both encoder and decoder are the same network.
 
 For forecasting, predictions are made by sampling directly from the model:
 
@@ -64,7 +64,7 @@ For forecasting, predictions are made by sampling directly from the model:
 \hat{z}^{i}_{t_0:t_0+\tau} \sim p\left(z_{t_{0}: t_{0}+\tau}^{i} \mid z_{1: t_{0}-1}^{i}, \mathbf{x}^{i}_{1:t_0+\tau}, \theta\right),
 ```
 
-where the model uses the previous time step's prediction $ \hat{z}_{t-1}^{i} $ as input, unlike the conditioning range where $ z_{t-1}^{i} $ is observed. This is shown in Figure 2.
+where the model uses the previous time step's prediction $` \hat{z}_{t-1}^{i} `$ as input, unlike the conditioning range where $` z_{t-1}^{i} `$ is observed. This is shown in Figure 2.
 
 Note that Transformers, unlike RNNs or LSTMs, do not compute the embedding in a sequential manner. Accordingly, when obtaining the embedding through a Transformer model and so to use the encoder-decoder architecture previously described, we use the Transformer decoder-only mode.
 
@@ -85,7 +85,7 @@ Common metrics used for forecasting evaluation are the Normalized Deviation (ND)
 	\end{split}
 ```
 
-Also, the quantile loss, $QL_{\rho}$, with $\rho \in (0, 1)$ are commonly used:
+Also, the quantile loss, $`QL_{\rho}`$, with $`\rho \in (0, 1)`$ are commonly used:
 
 ```math
 	\begin{split}
