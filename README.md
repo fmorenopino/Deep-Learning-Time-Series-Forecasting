@@ -73,6 +73,30 @@ Note that Transformers, unlike RNNs or LSTMs, do not compute the embedding in a 
   <figcaption><strong>Figure 2:</strong> Unrolled base architecture. On the left of the forecast horizon, the conditioning range can be found. On its right, the forecasting range.</figcaption>
 </div>
 
+
+### Metrics and Evaluation
+
+Common metrics used for forecasting evaluation are the Normalized Deviation (ND) and Root Mean Square Error (RMSE):
+
+$$
+	\begin{split}
+	\mathrm{ND} &=\frac{\sum_{i, t}\left|z_{i, t}-\hat{z}_{i, t}\right|}{\sum_{i, t}\left|z_{i, t}\right|} \\[5pt]
+	\text { RMSE } &=\frac{\sqrt{\frac{1}{N\left(T-t_{0}\right)} \sum_{i, t}\left(z_{i, t}-\hat{z}_{i, t}\right)^{2}}}{\frac{1}{N\left(T-t_{0}\right)} \sum_{i, t}\left|z_{i, t}\right|}\\[5pt]
+	\end{split}
+$$
+
+Also, the quantile loss, $QL_{\rho}$, with $\rho \in (0, 1)$ are commonly used:
+
+$$
+	\begin{split}
+	\mathrm{QL}_{\rho}(z, \hat{z})&=2 \frac{\sum_{i, t} P_{\rho}\left(z_{t}^{(i)}, \hat{z}_{t}^{(i)}\right)}{\sum_{i, t}\left|z_{t}^{(i)}\right|},\\
+	\quad P_{\rho}(z, \hat{z})&=\left\{\begin{array}{ll}
+	\rho(z-\hat{z}) & \text { if } z>\hat{z}, \\
+	(1-\rho)(\hat{z}-z) & \text { otherwise }.
+	\end{array}\right.
+	\end{split}
+$$
+
 ### References
 
 - Salinas, D., Flunkert, V., Gasthaus, J., & Januschowski, T. (2020). DeepAR: Probabilistic forecasting with autoregressive recurrent networks. International journal of forecasting, 36(3), 1181-1191.
