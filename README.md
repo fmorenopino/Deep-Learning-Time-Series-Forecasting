@@ -144,7 +144,7 @@ sampler = WeightedSampler(data_dir, args.dataset, replacement=True, max_samples=
 ### Instructions to run ConvTrans
 
 
-1. Run the main file: `python main.py`. (You may need to adjust the directory paths in the code).
+1. Run the main file: `python main.py`. The datasets used are located in `/ConvTrans/data/`.
 
 If training is taking too much time, you can set the argument `train-ins-num` to a lower number for training only on a subset of time series (but take into account that you probably won't converge to a proper solution and performance on test will drop)
 
