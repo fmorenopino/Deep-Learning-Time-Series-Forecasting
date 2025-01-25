@@ -4,10 +4,9 @@
 
 ### Fernando Moreno-Pino, University of Oxford (fernando.moreno-pino@eng.ox.ac.uk)
 
-This repository implements two different deep learning models for time series forecasting: `DeepAR` ("DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks") and `ConvTrans` ("Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting"). 
+This repository implements in PyTorch two different deep learning models for time series forecasting: `DeepAR` ("DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks") and `ConvTrans` ("Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting"). 
 
 ## A Brief Introduction to Deep Learning for Time Series Forecasting
-
 
 In this section, we formally state the problem of time series forecasting and introduce a base architecture that represents the core of most deep learning-based autoregressive models in the state-of-the-art. 
 
