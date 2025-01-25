@@ -27,18 +27,7 @@ Several state-of-the-art deep-autoregressive models, including DeepAR and ConvTr
 
 1. **Embedding Function** $`\mathbf{e}_{t}^{i} = f_{\phi}\left(\mathbf{e}_{t-1}^{i}, z^{i}_{t-1}, \mathbf{x}_{t}^{i} \right) \in \mathbb{R}^{D}`$, where $` f_{\phi}(\cdot) `$ is the transit function with parameters $` \phi `$. At each time step $` t `$, the embedding function takes as input the previous time step's embedding $` \mathbf{e}_{t-1}^{i} `$, the previous value of the time series $` z_{t-1}^{i} `$, and the current covariates $` \mathbf{x}_{t}^{i} `$. This function can be implemented using various architectures such as a RNN, a LSTM, a Temporal Convolutional Network (TCN), or a Transformer model.
 
-2. **Probabilistic Model** $`p\left(z_{t}^{i} \mid \mathbf{e}_{t}^{i} \right)`$, with parameters $` \psi `$, which utilises the embedding $` \mathbf{e}_{t}^{i} `$ to estimate the next value of the time series $` \hat{z}_{t}^{i} `$. Typically, this probabilistic model is implemented as a neural network function that parameterises the required probability distribution. For instance, a Gaussian distribution can be represented through its mean $` \mu = g_{\mu}(\mathbf{w}_{\mu}^{T} \mathbf{e}_{t}^{i} + b_{\mu}) `$ and standard deviation $` \sigma = \log \left(1 + \exp \left(g_{\sigma}(\mathbf{w}_{\sigma}^{T} \mathbf{e}_{t}^{i} + b_{\sigma})\right)\right) `$:
-
-   ```math
-   \mu = g_{\mu}(\mathbf{w}_{\mu}^{T} \mathbf{e}_{t}^{i} + b_{\mu}),
-   ```
-   
-
-   ```math
-   \sigma = \log \left(1 + \exp \left(g_{\sigma}(\mathbf{w}_{\sigma}^{T} \mathbf{e}_{t}^{i} + b_{\sigma})\right)\right),
-   ```
-
-   where $` g_{\mu} `$ and $` g_{\sigma} `$ are neural networks.
+2. **Probabilistic Model** $`p\left(z_{t}^{i} \mid \mathbf{e}_{t}^{i} \right)`$, with parameters $` \psi `$, which utilises the embedding $` \mathbf{e}_{t}^{i} `$ to estimate the next value of the time series $` \hat{z}_{t}^{i} `$. Typically, this probabilistic model is implemented as a neural network function that parameterises the required probability distribution. For instance, a Gaussian distribution can be represented through its mean $` \mu = g_{\mu}(\mathbf{w}_{\mu}^{T} \mathbf{e}_{t}^{i} + b_{\mu}) `$ and standard deviation $` \sigma = \log \left(1 + \exp \left(g_{\sigma}(\mathbf{w}_{\sigma}^{T} \mathbf{e}_{t}^{i} + b_{\sigma})\right)\right) `$, where $` g_{\mu} `$ and $` g_{\sigma} `$ are neural networks.
 
 <div align="left">
   <img src="DeepAR/notebook_images/basic_architecture.png" width="250" alt="Basic Architecture"/>
@@ -48,7 +37,7 @@ models. Gray represents observed variables.</figcaption>
 
 ### Training
 
-The model's parameters $` \theta = \{\phi, \psi\} `$ are optimised by maximising the log-likelihood function $` \mathcal{L}(\theta) $ over the observed data within the conditioning range (from $` t = 1 $ to $ t_0 - 1 $):
+The model's parameters $` \theta = \{\phi, \psi\} `$ are optimised by maximising the log-likelihood function $` \mathcal{L}(\theta) `$ over the observed data within the conditioning range (from $` t = 1 `$ to $` t_0 - 1 `$):
 
 ```math
 \mathcal{L}(\theta) = \sum_{i=1}^{N} \log p\left(z_{1:t_0-1}^{i} \mid \mathbf{x}_{1:t_0-1}^{i}, \theta\right) = \sum_{i=1}^{N} \sum_{t=1}^{t_0-1} \log p\left(z_{t}^{i} \mid \mathbf{x}_{1:t-1}^{i}, \theta (\phi, \psi) \right).
