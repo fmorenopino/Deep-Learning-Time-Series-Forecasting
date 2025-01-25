@@ -9,7 +9,7 @@ DeepAR/electricity.txt
 DeepAR/experiments/base_model/figures/
 DeepAR/experiments/base_model/figures_*/
 ConvTrans/runs/
-
+best.pth.tar
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
