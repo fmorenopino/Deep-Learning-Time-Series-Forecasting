@@ -97,10 +97,11 @@ Also, the quantile loss, $`QL_{\rho}`$, with $`\rho \in (0, 1)`$ are commonly us
 
 ## Creating Conda Environment
 
-The repo contains a `dlts.yml` file, a conda environment that allows running both models both models. To install it:
+The repo contains a `dlts.yml` file, a conda environment that allows running both models both models. To import and activate it, you can do:
 
 ```
 conda env create -f dlts.yml
+conda activate dlts
 ```
 
 Alternatively, you can create a new conda environment with Python 3.10 (version used for testing) and install the rest of the packages (see requirements.txt):
