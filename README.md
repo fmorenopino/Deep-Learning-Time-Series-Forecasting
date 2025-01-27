@@ -103,10 +103,12 @@ The repo contains a `dlts.yml` file, a conda environment that allows running bot
 conda env create -f dlts.yml
 ```
 
-Alternatively, you can create a new conda environment with Python 3.10 (version used for testing) and install the rest of the packages (see requirements.txt).
+Alternatively, you can create a new conda environment with Python 3.10 (version used for testing) and install the rest of the packages (see requirements.txt):
 
 ```
 conda create --name name-of-env python=3.10
+conda activate name-of-env
+pip install -r requirements.txt
 ```
 
 (Note: it is recommended to run the code in VS Code).
