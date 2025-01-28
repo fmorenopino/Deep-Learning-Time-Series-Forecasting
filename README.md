@@ -31,7 +31,7 @@ Several state-of-the-art deep-autoregressive models, including DeepAR and ConvTr
 <p align="center">
   <img src="DeepAR/notebook_images/basic_architecture.png" width="250" alt="Basic Architecture"/>
   <br/>
-  <strong>Figure 1:</strong> Base architecture of deep learning-based autoregressive models. Gray represents observed variables.
+  <strong>Figure 1:</strong> Base architecture of deep learning-based autoregressive models. Gray represents observed variables. Source: Moreno-Pino, Fernando, et al, 2023.
 </p>
 
 ### Training
@@ -61,7 +61,7 @@ Note that Transformers, unlike RNNs or LSTMs, do not compute the embedding in a 
 <p align="center">
   <img src="DeepAR/notebook_images/basic_architecture_unrolled.png" width="500" alt="Unrolled Basic Architecture"/>
   <br/>
-  <strong>Figure 2:</strong> Unrolled base architecture. On the left of the forecast horizon, the conditioning range can be found. On its right, the forecasting range.
+  <strong>Figure 2:</strong> Unrolled base architecture. On the left of the forecast horizon, the conditioning range can be found. On its right, the forecasting range. Source: Moreno-Pino, Fernando, et al, 2023.
 </p>
 
 
